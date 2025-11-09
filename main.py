@@ -7,8 +7,8 @@ import torch.optim as optim
 # device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 device = torch.device("cpu")
 
-a = 0.003
-n = 10 # Number of periods
+a = 0.1
+n = 0.5 # Number of periods
 x = np.linspace(0, 1, 500)
 t = np.linspace(0, 1, 500)
 X, T = np.meshgrid(x, t)
@@ -43,7 +43,7 @@ X_flat = X.flatten()[:, None]
 T_flat = T.flatten()[:, None]
 U_flat = sol(X_flat, T_flat)
 
-n_obs = 10
+n_obs = 0
 indices = np.random.choice(len(X_flat), size=n_obs, replace=False)
 
 X_obs = X_flat[indices]
@@ -166,7 +166,7 @@ def loss_cond(nn):
 	return loss_bc_left + loss_bc_right + loss_ic
 
 
-n_epochs = 50000
+n_epochs = 20000
 for epoch in range(n_epochs):
     optimizer.zero_grad()
 
